@@ -66,7 +66,7 @@ export default function ProductDetails() {
             </Link>
 
             <button
-              onClick={() => setCart(cart + 1)}
+              onClick={() => setCart([...cart, { product }])}
               className="w-56 py-3 text-center text-white font-bold bg-orange-500 rounded-xl hover:bg-orange-600 shadow-md transition-all hover:scale-105 sm:text-xs sm:w-35 sm:m-4">
               Add to Cart ({cart.length})
             </button>
