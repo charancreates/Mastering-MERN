@@ -8,10 +8,12 @@ import NotFound from "./Components/NotFound";
 import NavBar from "./Components/NavBar";
 import Header from "./Components/Header";
 import ProductDetails from "./Components/ProductDetails";
+import { CartContext } from "./Components/CartContext";
 
 function App() {
+  const [cart, setCart] = useState([]);
   return (
-    <>
+    <CartContext.Provider value={{ cart, setCart }}>
       <Header />
       <NavBar />
       <Routes>
@@ -21,7 +23,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
       </Routes>
-    </>
+    </CartContext.Provider>
   );
 }
 

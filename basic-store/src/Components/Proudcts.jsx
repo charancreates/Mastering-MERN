@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "./CartContext";
+import { useContext } from "react";
 
 export default function Products() {
   const [products, setProudcts] = useState([]);
@@ -20,6 +22,9 @@ export default function Products() {
     }
     getProucts();
   }, []);
+
+  const { cart, setCart } = useContext(CartContext);
+  console.log(cart);
   return (
     <>
       {loading ? (
@@ -45,6 +50,11 @@ export default function Products() {
                 {product.title}
               </Link>
               <p className="flex=auto">${product.price}</p>
+              <button
+                onClick={() => setCart([...cart, { product }])}
+                className="w-56 py-2 mt-3 text-center text-white font-bold bg-orange-500 rounded-xl hover:bg-orange-600 shadow-md transition-all hover:scale-105">
+                Add to Cart ({cart.length})
+              </button>
             </div>
           ))}
         </div>

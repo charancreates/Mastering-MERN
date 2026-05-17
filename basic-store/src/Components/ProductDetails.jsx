@@ -1,10 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { CartContext } from "./CartContext";
+import { useContext } from "react";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { cart, setCart } = useContext(CartContext);
   let { id } = useParams();
   useEffect(() => {
     async function getProducts() {
@@ -55,15 +58,22 @@ export default function ProductDetails() {
               Rating : {product.rating?.rate}★ ({product.rating?.count})
             </p>
           </div>
-          <div className="flex justify-between w-full mt-8 px-4">
+          <div className="flex justify-between items-center w-full mt-8 px-4">
             <Link
               to={`/products/${prev}`}
-              className="text-right m-0 p-1.5 text-white font-semibold bg-orange-400 rounded-xl hover:bg-orange-500 transition-colors ">
+              className="w-28 py-2 text-center text-white font-semibold bg-orange-400 rounded-xl hover:bg-orange-500 transition-colors">
               Prev
             </Link>
+
+            <button
+              onClick={() => setCart(cart + 1)}
+              className="w-56 py-3 text-center text-white font-bold bg-orange-500 rounded-xl hover:bg-orange-600 shadow-md transition-all hover:scale-105 sm:text-xs sm:w-35 sm:m-4">
+              Add to Cart ({cart.length})
+            </button>
+
             <Link
               to={`/products/${next}`}
-              className="text-right m-0 p-1.5 text-white font-semibold bg-orange-400 rounded-xl hover:bg-orange-500 transition-colors ">
+              className="w-28 py-2 text-center text-white font-semibold bg-orange-400 rounded-xl hover:bg-orange-500 transition-colors">
               Next
             </Link>
           </div>
