@@ -5,7 +5,7 @@ import { getUser } from "../controllers/getUser.js";
 import { deleteUser } from "../controllers/deleteUser.js";
 const router = Router();
 
-router.route("/users").get(getUsers).post(postUsers);
-router.route("/users/:id").get(getUser).delete(deleteUser);
+router.route("/").get(getUsers).post(postUsers);
+router.route("/:id").get(getUser).delete(deleteUser);
 
 export default router;

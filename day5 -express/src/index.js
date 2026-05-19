@@ -1,12 +1,13 @@
+import "dotenv/config";
 import express from "express";
-import createError from "http-errors";
 import userRouter from "./routes/userRouter.js";
 import { logger } from "./middleware/logger.js";
 import { apiChecker } from "./middleware/apiChecker.js";
 import { errorFound } from "./middleware/errorfound.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+console.log(port);
 
 app.use(express.json());
 
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
 //api header
 app.use(apiChecker);
 
-app.use(userRouter);
+app.use("/users", userRouter);
 
 //error handler middleware
 app.use(errorFound);
