@@ -3,7 +3,7 @@ import express from "express";
 import userRouter from "./routes/userRouter.js";
 import { logger } from "./middleware/logger.js";
 import { apiChecker } from "./middleware/apiChecker.js";
-import { errorFound } from "./middleware/errorfound.js";
+import { errorFound } from "./middleware/errorFound.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
