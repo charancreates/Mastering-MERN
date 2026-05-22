@@ -1,7 +1,8 @@
 import router from "express";
+import { createUser } from "../controllers/postControllers.js";
 
-const router = router();
+const userRoutes = router();
 
-router.route("/").post(createUser);
+userRoutes.route("/").post(createUser);
 
-export default router;
+export default userRoutes;

@@ -12,7 +12,7 @@ export const getPosts = async (req, res, next) => {
       filter.isPublished = req.query.published === "true";
     }
 
-    let query = Post.find(filter);
+    let query = Post.find(filter).populate("author");
     if (req.query.sort === "newest") {
       query = query.sort({ createdAt: -1 });
     }

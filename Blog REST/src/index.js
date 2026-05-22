@@ -4,6 +4,7 @@ import { logger } from "./middleware/logger.js";
 import postRoutes from "./routes/postRoutes.js";
 import { handleError } from "./middleware/handleError.js";
 import mongoose from "mongoose";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 app.use(logger);
 
 app.use("/posts", postRoutes);
+app.use("/users", userRoutes);
 
 app.use(handleError);
 
