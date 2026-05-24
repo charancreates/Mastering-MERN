@@ -5,8 +5,10 @@ import postRoutes from "./routes/postRoutes.js";
 import { handleError } from "./middleware/handleError.js";
 import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes.js";
+import cors from "cors";
 
 const app = express();
+app.use(cors({ origin: "https://www.google.com" }));
 
 // mongoose.connect(process.env.MONGO_URI);
 async function connectDB() {

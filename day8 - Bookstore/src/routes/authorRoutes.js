@@ -6,14 +6,15 @@ import {
   getAuthors,
   updateAuthor,
 } from "../controllers/authorControllers.js";
+import { requireAuth } from "../middleware/requireAuth.js";
 
 const authorRoutes = Router();
 
-authorRoutes.route("/").get(getAuthors).post(createAuthor);
+authorRoutes.route("/").get(getAuthors).post(requireAuth, createAuthor);
 authorRoutes
   .route("/:id")
-  .put(updateAuthor)
   .get(getAuthor)
-  .delete(deleteAuthor);
+  .put(requireAuth, updateAuthor)
+  .delete(requireAuth, deleteAuthor);
 
 export default authorRoutes;
