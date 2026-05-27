@@ -18,6 +18,24 @@ export const createUsers = async (req, res, next) => {
   }
 };
 
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    const success = await bcrypt.compare(password, user.password);
+    if (success) {
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "7d",
+      });
+      res.json({ name: user.name, email: user.email, token });
+    } else {
+      res.status(401).json({ error: "wrong id or password" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const getUsers = async (req, res, next) => {
   try {
     const users = await User.find();

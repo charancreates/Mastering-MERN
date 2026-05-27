@@ -6,10 +6,12 @@ import userRouter from "./Routes/userRoutes.js";
 import NoteRouter from "./Routes/noteRoutes.js";
 import logger from "./middleware/logger.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors({ origin: process.env.Frontend }));
 app.use(express.json());
 app.use(logger);
 
