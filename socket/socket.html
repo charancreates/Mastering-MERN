@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Scoket</title>
+  </head>
+  <body>
+    <h3>Message app</h3>
+    <label> message : <input /></label>
+    <button>Send</button>
+    <label> Room : <input id="roomInput" /></label>
+    <button id="join">Join</button>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const label = document.querySelector("input");
+      const sendbutton = document.querySelector("button");
+      const socket = io("http://localhost:3000");
+    </script>
+  </body>
+</html>

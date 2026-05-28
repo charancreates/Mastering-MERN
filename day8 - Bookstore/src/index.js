@@ -8,10 +8,16 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import cors from "cors";
 import authRouter from "./routes/authRoutes.js";
 import { requireAuth } from "./middleware/requireAuth.js";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 const app = express();
-
-app.use(cors({ origin: "http://localhost:5173" }));
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+  },
+});
 
 const port = process.env.PORT || 3000;
 
@@ -28,8 +34,16 @@ const ConnectDB = async () => {
 ConnectDB();
 app.use(express.json());
 app.use(logger);
+
 app.get("/", (req, res) => {
   res.send("Bookstore homepage");
+});
+
+io.on("connection", (socket) => {
+  console.log("user connected", socket.id);
+  socket.on("disconnect", () => {
+    console.log("user disconnected", socket.id);
+  });
 });
 
 app.use("/auth", authRouter);
@@ -38,6 +52,6 @@ app.use("/authors", authorRoutes);
 
 app.use(errorHandler);
 
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log("server is running");
 });
