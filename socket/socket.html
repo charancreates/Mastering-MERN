@@ -11,9 +11,29 @@
     <button id="join">Join</button>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
-      const label = document.querySelector("input");
+      const input = document.querySelector("input");
       const sendbutton = document.querySelector("button");
       const socket = io("http://localhost:3000");
+
+      const roomInput = document.getElementById("roomInput");
+      const joinbtn = document.getElementById("join");
+
+      let currentroom = "";
+      sendbutton.addEventListener("click", () => {
+        socket.emit("message", { room: currentroom, text: input.value });
+        input.value = "";
+      });
+
+      joinbtn.addEventListener("click", () => {
+        currentroom = roomInput.value;
+        socket.emit("join", currentroom);
+      });
+
+      socket.on("message", (data) => {
+        const p = document.createElement("p");
+        p.textContent = data;
+        document.body.appendChild(p);
+      });
     </script>
   </body>
 </html>

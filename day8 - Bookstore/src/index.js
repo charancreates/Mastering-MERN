@@ -41,6 +41,15 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("user connected", socket.id);
+
+  socket.on("message", (data) => {
+    io.to(data.room).emit("message", data.text);
+  });
+
+  socket.on("join", (data) => {
+    socket.join(data);
+  });
+
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.id);
   });
