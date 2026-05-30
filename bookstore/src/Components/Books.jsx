@@ -34,40 +34,40 @@ export default function Books() {
       {books.map((book) => (
         <div key={book._id}>
           {book.title}: Rs {book.price}
-          <button className="pl-2 p-1" onClick={() => deleteBook(book._id)}>
+          <button className="p-1 pl-2" onClick={() => deleteBook(book._id)}>
             👉🏻🗑️
           </button>
         </div>
       ))}
       <form onSubmit={addBook}>
-        <label className="flex items-center justify-center gap-4 m-10 text-white ">
+        <label className="m-10 flex items-center justify-center gap-4 text-white">
           Title
           <input
             onChange={(e) => setFileds({ ...fileds, title: e.target.value })}
             value={fileds.title}
-            className=" bg-gray-800 border border-gray-500 rounded-md px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+            className="rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-white focus:border-blue-500 focus:outline-none"
           />
         </label>
-        <label className="flex items-center justify-center gap-4 m-10 text-white ">
+        <label className="m-10 flex items-center justify-center gap-4 text-white">
           Genre
           <input
             value={fileds.genre}
             onChange={(e) => setFileds({ ...fileds, genre: e.target.value })}
-            className=" bg-gray-800 border border-gray-500 rounded-md px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+            className="rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-white focus:border-blue-500 focus:outline-none"
           />
         </label>
-        <label className="flex items-center justify-center gap-4 m-10 text-white ">
+        <label className="m-10 flex  text-white items-center justify-center gap-4">
           Price
           <input
             value={fileds.price}
             type="Number"
             onChange={(e) => setFileds({ ...fileds, price: e.target.value })}
-            className=" bg-gray-800 border border-gray-500 rounded-md px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+            className="rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-white focus:border-blue-500 focus:outline-none"
           />
         </label>
         <button
           type="submit"
-          className="bg-gray-800 px-10 py-2 rounded-3xl text-white border border-gray-500 hover:border-blue-500">
+          className="rounded-3xl border border-gray-500 bg-gray-800 px-10 py-2 text-white hover:border-blue-500">
           Add Book
         </button>
       </form>
