@@ -32,3 +32,32 @@ nvalue = 2.4;
 if (typeof nvalue === "string") {
   nvalue.toUpperCase();
 }
+
+try {
+} catch (error) {
+  if (error instanceof Error) {
+    console.log(error.message);
+  }
+  console.log("Error", error);
+}
+
+const data: unknown = "idk what is it";
+const strData: string = data as string; //env vars as forcefully
+
+type Role = "admin" | "user" | "superadmin";
+
+function RBAC(role: Role): void {
+  if (role === "admin") {
+    console.log(`Rediricting to admin dashboard`);
+    return;
+  }
+  if (role === "user") {
+    console.log(`Rediricting to user dashboard`);
+    return;
+  }
+  role;
+}
+
+function neverReturn(): never {
+  while (true) {}
+}
