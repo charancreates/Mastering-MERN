@@ -19,6 +19,7 @@ export function useFetch<T>(url: string): FetchState<T> {
       try {
         const response = await axios.get<T>(url);
         setState({ data: response.data, loading: false, error: null });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         setState({
           data: null,
