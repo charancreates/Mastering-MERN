@@ -8,20 +8,25 @@ const response = {
     total: 2,
   },
 };
+
 // status, total, and the first user's name
 const {
   status,
-  data: {
-    total,
-    users: [{ name }],
-  },
+  data: { total, users: [{ name: firstName } = {}] = [] },
 } = response;
 
 console.log(status);
 console.log(total);
-console.log(name);
+console.log(firstName);
 
 const data = { user: { namee: "charan", age: 21, skills: ["react", "node"] } };
+
+// const { user } = data;
+// const {
+//   namee,
+//   age,
+//   skills: [skill],
+// } = user;
 
 const {
   user: {

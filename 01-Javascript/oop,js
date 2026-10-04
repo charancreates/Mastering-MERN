@@ -1,0 +1,33 @@
+//object literals
+const user = {
+  username: "charan",
+  loginCount: 0,
+  siginedIn: true,
+
+  getUserDetails: function () {
+    // console.log("yoyo UserName:", this.username);
+    // console.log(this);
+  },
+};
+
+// console.log(user.getUserDetails());
+
+function User(username, loginCount, isLoggedIn) {
+  this.username = username;
+  this.loginCount = loginCount;
+  this.isLoggedIn = isLoggedIn;
+  this.greeing = function () {
+    console.log("welcome " + this.username);
+  };
+
+  return this;
+}
+
+//without new value override
+const userOne = new User("yoyo", 9, true);
+const userTwo = new User("nah", 90, false);
+
+console.log(userOne.constructor);
+console.log(userTwo instanceof User);
+
+//new keyword - creates new object, construction function call, injection, function

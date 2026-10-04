@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+  </head>
+  <body>
+    <button>button Clicked</button>
+  </body>
+  <script>
+    class React {
+      constructor() {
+        this.library = "react";
+        this.server = "https://idk.com";
+        document
+          .querySelector("button")
+          .addEventListener("click", this.handleClick.bind(this));
+      }
+      //requirement
+      handleClick() {
+        console.log("button clicked");
+        console.log(this.server);
+      }
+    }
+    // this is jis ne call kiya
+    const app = new React();
+  </script>
+</html>

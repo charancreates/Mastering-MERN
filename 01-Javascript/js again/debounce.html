@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Input <input type="text" id="input" /></h3>
+    <h4>Default: <span id="default"></span></h4>
+    <h4>Debounce: <span id="debounce"></span></h4>
+    <!-- <h4>Throttle: <span id="throttle"></span></h4> -->
+    <button class="sendbtn">send chat</button>
+    <!-- <h4>Element: <span id="element"></span></h4> -->
+    <!-- <script src="debounce_throttle.js"></script> -->
+  </body>
+  <script>
+    const input = document.querySelector("#input");
+    const defaultText = document.querySelector("#default");
+    const debounceText = document.querySelector("#debounce");
+    const sendbtn = document.querySelector(".sendbtn");
+    // const throttleText = document.querySelector("#throttle");
+
+    function debounce(cb, delay = 1000) {
+      let timeoutId;
+      return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          cb(...args);
+        }, delay);
+      };
+    }
+
+    const updateDebounceText = debounce((text) => {
+      debounceText.textContent = text;
+    }, 1000);
+
+    input.addEventListener("input", (e) => {
+      defaultText.textContent = e.target.value;
+      updateDebounceText(e.target.value);
+    });
+
+    sendbtn.addEventListener("click", (e) => {
+      const text = sendChatSM(input.value);
+      if (text) {
+        const p = document.createElement("p");
+        p.textContent = text;
+        document.body.appendChild(p);
+      }
+    });
+
+    function sendMessage(text) {
+      return text;
+    }
+    function throttle(fn, delay) {
+      let lastCall = 0;
+      return function (...args) {
+        const now = Date.now();
+        if (now - lastCall < delay) {
+          console.log(now - lastCall, delay);
+          return;
+        }
+        lastCall = now;
+        return fn(...args);
+      };
+    }
+    const sendChatSM = throttle(sendMessage, 2000);
+  </script>
+</html>
